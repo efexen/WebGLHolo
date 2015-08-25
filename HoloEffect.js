@@ -20,16 +20,16 @@ THREE.HoloEffect = function(width, height, renderer) {
     renderer.clear();
 
     renderer.setViewport(0, 0, width, halfHeight);
-    renderer.render(scene, camera);
-
-    renderer.setViewport(0, halfHeight, width, halfHeight);
     renderer.render(scene, cameraBottom);
 
+    renderer.setViewport(0, halfHeight, width, halfHeight);
+    renderer.render(scene, camera);
+
     renderer.setViewport(0, 0, halfWidth, height);
-    renderer.render(scene, cameraLeft);
+    renderer.render(scene, cameraRight);
 
     renderer.setViewport(halfWidth, 0, halfWidth, height);
-    renderer.render(scene, cameraRight);
+    renderer.render(scene, cameraLeft);
   };
 
 };
