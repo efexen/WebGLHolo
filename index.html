@@ -1,6 +1,7 @@
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+    <script src="HoloEffect.js"></script>
     <script src="http://mrdoob.github.io/three.js/examples/fonts/helvetiker_regular.typeface.js"></script>
     <style>
       body {
@@ -12,8 +13,7 @@
   <body>
 
     <script>
-      var camera, scene, renderer, text, pivot, effect;
-
+      var camera, scene, renderer, text, effect;
 
       function init() {
         renderer = new THREE.WebGLRenderer();
@@ -25,7 +25,7 @@
 
         scene = new THREE.Scene();
 
-        var geo = new THREE.TextGeometry('FxN', { size: 150, height: 10, font: 'helvetiker' });
+        var geo = new THREE.TextGeometry('FxN', { size: 100, height: 10, font: 'helvetiker' });
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
         text = new THREE.Mesh(geo, material);
@@ -48,29 +48,6 @@
         requestAnimationFrame(animate);
         effect.render(scene, camera);
       }
-
-      THREE.HoloEffect = function(width, height, renderer) {
-
-        var _cameraTop = new THREE.PerspectiveCamera(70, width / height, 1, 1000);
-        _cameraTop.position.z = 400;
-        var _cameraBottom = new THREE.PerspectiveCamera(70, width / height, 1, 1000);
-        _cameraBottom.position.z = 400;
-        renderer.autoClear = false;
-
-        renderer.setSize(width, height);
-
-        this.render = function(scene, camera) {
-          renderer.setViewport(0, 0, width, height);
-          renderer.clear();
-
-          renderer.setViewport(0, 0, width, height / 2);
-          renderer.render(scene, _cameraTop);
-
-          renderer.setViewport(0, height / 2, width, height / 2);
-          renderer.render(scene, _cameraBottom);
-        };
-
-      };
 
       init();
 
